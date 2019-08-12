@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Register</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href='vendor/bootstrap/css/glyphicon.min.css' rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includeFooter").load("footer.html");
+      //$("#includeHeader").load("header.html");
+    });
+    </script>
+
+    <script>
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          document.getElementById("latitude").value = 40.617478;
+          document.getElementById("longitude").value = -74.0241252;
+        }
+      }
+      function showPosition(position) {
+        document.getElementById("latitude").value = position.coords.latitude;
+        document.getElementById("longitude").value = position.coords.longitude;
+      }
+    </script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <div id="includeHeader"><% include ./header %></div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">Register
+      </h1>
+
+      <!-- Contact Form -->
+      <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+      <div class="row">
+        <div class="col-lg-8 mb-4">
+          <form name="sentMessage" id="contactForm" novalidate action="register" method="post">
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>Name:</label>
+                <input type="text" class="form-control" name="name" required data-validation-required-message="Please enter the name.">
+                <p class="help-block"></p>
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>Email:</label>
+                <input type="email" class="form-control" name="email" required data-validation-required-message="Please enter the email.">
+                <p class="help-block"></p>
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>Password:</label>
+                <input type="password" class="form-control" name="password" required data-validation-required-message="Please enter the password">
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>State</label>
+                <select id="state" name="state" class="form-control" required data-validation-required-message="Please enter atleast one state">
+                <%
+                for ( var i = 0; i < locals.states.length; i++ )
+                {
+                    %><option value="<%=locals.states[ i ].stateid %>" name="<%=locals.states[ i ].stateid %>"><%=locals.states[ i ].name %></option><%
+                }
+                %>
+                </select>
+              </div>
+            </div>
+            <div id="success"></div>
+            <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary send-message-color bg-dark" id="sendMessageButton">Register</button> <a class="bg-dark btn btn-secondary" href="/">Already a user?</a>
+          </form>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <br/>
+    <br/>
+    <br/>
+
+    <!-- Footer -->
+    <div id="includeFooter"></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+    <script src="js/jqBootstrapValidation.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" />
+    <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+
+    })
+    $(document).ready(function(){
+        var time_input=$('input[name="time"]'); //our date input has the name "date"
+        time_input.timepicker()
+
+    })
+    </script>
+  </body>
+
+</html>

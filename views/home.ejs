@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Oingo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href='vendor/bootstrap/css/glyphicon.min.css' rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includeFooter").load("footer.html");
+      //$("#includeHeader").load("header.html");
+    });
+    </script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <div id="includeHeader"><% include ./header %></div>
+
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+            <h1 class="my-4">Notes Feed</h1><form action="/home" method="post">
+              <div class="form-group">
+                <input type="text" name="search" ><button type="submit" class="btn btn-primary">Search</button>
+              </div>
+
+            </form><a href="home-map">Switch to Map view</a>
+        </div>
+        <div class="col-lg-4 mb-4">
+
+        </div>
+        <div class="col-lg-4 mb-4">
+
+        </div>
+
+      </div>
+      <!-- Marketing Icons Section -->
+      <div class="row">
+        <% locals.notes.forEach(function(note){%>
+            
+            <% if(note.description.includes(locals.search)){ %>
+		        <div class="col-lg-4 mb-4">
+              <div class="card h-100">
+                <a href=noteread?noteid=<%= note.noteid %>><h4 class="card-header"><%= note.title %></h4></a>
+                <div class="card-body">
+                  <p class="card-text"><%= note.description %></p>
+                </div>
+                <!--<div class="card-footer">
+                  <a href="#" class="btn btn-primary">Learn More</a>
+                </div>-->
+              </div>
+            </div>
+
+		     <%}
+        });%>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div id="includeFooter"></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Oingo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href='vendor/bootstrap/css/glyphicon.min.css' rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includeFooter").load("footer.html");
+      //$("#includeHeader").load("header.html");
+    });
+    </script>
+    <script type="text/javascript"
+      src=
+    "http://maps.googleapis.com/maps/api/js?key=AIzaSyB7RI0dAxn5-0vPv4Log-Nj6eiFF5HAdZU&sensor=false">
+    </script>
+    <script type="text/javascript">
+
+      function initialize() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: {lat: 40.632415, lng: -74.027748}
+        });
+        var marker1;
+        <% locals.notes.forEach(function(note){%>
+        var myLatLng, contentString1, infowindow1;
+        myLatLng = {lat: <%= note.latitude %>, lng: <%= note.longitude %>};
+        marker1 = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: "<%= note.title %>"
+        });
+        map.setCenter(marker1.getPosition())
+        contentString1 = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<a href=noteread?noteid=<%= note.noteid %>><h1 id="firstHeading" class="firstHeading"><%= note.title %></h1></a>'+
+            '<div id="bodyContent">'+
+            '<p><%= note.description %></p>' +
+            '</div>'+
+            '</div>';
+        infowindow1 = new google.maps.InfoWindow();
+
+        google.maps.event.addListener(marker1,'click', (function(marker,content,infowindow){
+                return function() {
+                   infowindow.setContent(content);
+                   infowindow.open(map,marker);
+                };
+        })(marker1,contentString1,infowindow1));
+        <%});%>
+
+      }
+      </script>
+
+  </head>
+
+  <body onload="initialize()">
+
+    <!-- Navigation -->
+    <div id="includeHeader"><% include ./header %></div>
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <h1 class="my-4">Notes Feed</h1><a href="/">Switch to List view</a>
+
+      <!-- Marketing Icons Section -->
+      <div id="map" style="width:1000px; height: 700px;"></div><br/>
+      <!--<script>
+
+        function initMap() {
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: {lat: 40.632415, lng: -74.027748}
+          });
+          <% locals.notes.forEach(function(note){%>
+          var myLatLng, contentString1, infowindow1, marker1;
+          console.log(<%= note.latitude %>);
+          myLatLng = {lat: <%= note.latitude %>, lng: <%= note.longitude %>};
+          contentString1 = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading"><%= note.title %></h1>'+
+              '<div id="bodyContent">'+
+              '<p><%= note.description %></p>' +
+              '</div>'+
+              '</div>';
+          infowindow1 = new google.maps.InfoWindow({
+            content: contentString1
+          });
+          marker1 = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: "<%= note.title %>"
+          });
+          marker1.addListener('click', function() {
+            infowindow1.open(map, marker1);
+          });
+          <%});%>
+
+        }
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7RI0dAxn5-0vPv4Log-Nj6eiFF5HAdZU&callback=initMap">
+      </script>
+      -->
+
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div id="includeFooter"></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

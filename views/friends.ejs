@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Friends</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href='vendor/bootstrap/css/glyphicon.min.css' rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includeFooter").load("footer.html");
+      //$("#includeHeader").load("header.html");
+    });
+    </script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <div id="includeHeader"><% include ./header %></div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <h1 class="my-4">Friends</h1>
+
+      <!-- Marketing Icons Section -->
+      <div class="row">
+        <% locals.friends.forEach(function(friend){%>
+
+
+		        <div class="col-lg-4 mb-4">
+              <div class="card h-100">
+                <h4 class="card-header"><%= friend.name %></h4>
+              </div>
+            </div>
+		     <%});%>
+      </div>
+      <h1 class="my-4">Pending Requests(Accept by clicking)</h1>
+      <div class="row">
+        <% locals.pending.forEach(function(accept){%>
+		        <div class="col-lg-4 mb-4">
+              <div class="card h-100">
+                <a href=friends/accept?userid=<%= accept.userid %>><h4 class="card-header"><%= accept.name %></h4></a>
+              </div>
+            </div>
+		     <%});%>
+      </div>
+      <h1 class="my-4">Send Friend Requests(Send by clicking)</h1>
+      <div class="row">
+        <% locals.users.forEach(function(user){%>
+          <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+              <a href=friends/accept?userid=<%= user.userid %>><h4 class="card-header"><%= user.name %></h4></a>
+            </div>
+          </div>
+		     <%});%>
+      </div>
+      <!-- /.row -->
+
+      <!-- Portfolio Section -->
+      <!--<h2>Portfolio Heading</h2>
+
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project One</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Two</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Three</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Four</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Five</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Six</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <!-- /.row -->
+
+      <!-- Features Section -->
+      <!--<div class="row">
+        <div class="col-lg-6">
+          <h2>Modern Business Features</h2>
+          <p>The Modern Business template by Start Bootstrap includes:</p>
+          <ul>
+            <li>
+              <strong>Bootstrap v4</strong>
+            </li>
+            <li>jQuery</li>
+            <li>Font Awesome</li>
+            <li>Working contact form with validation</li>
+            <li>Unstyled page elements for easy customization</li>
+          </ul>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+        </div>
+      </div>-->
+      <!-- /.row -->
+
+      <!--<hr>
+
+      <div class="row mb-4">
+        <div class="col-md-8">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+        </div>
+        <div class="col-md-4">
+          <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
+        </div>
+      </div>-->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div id="includeFooter"></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

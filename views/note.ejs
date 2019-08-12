@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Note</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href='vendor/bootstrap/css/glyphicon.min.css' rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+      $("#includeFooter").load("footer.html");
+      //$("#includeHeader").load("header.html");
+    });
+    </script>
+
+  </head>
+
+  <body>
+    <script>
+
+      function initMap() {
+        var myLatLng = {lat: <%= note.latitude %>, lng: <%= note.longitude %>};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: myLatLng
+        });
+        var marker1 = new google.maps.Marker({
+          position: myLatLng,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src=https://maps.googleapis.com/maps/api/js?key=AIzaSyB7RI0dAxn5-0vPv4Log-Nj6eiFF5HAdZU&callback=initMap>
+    </script>
+
+    <!-- Navigation -->
+    <div id="includeHeader"><% include ./header %></div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3"><%=note.title %>
+        <small>by
+          <%=note.name %>
+        </small>
+      </h1>
+
+      <div class="row">
+
+        <!-- Post Content Column display:inline; visibility: visible !important; overflow: visible !important; -->
+        <div class="col-lg-4">
+          <div id="map" style="width:380; height: 500px;"></div>
+        </div>
+        <div class="col-lg-8">
+
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>Posted on <%= note.created_at%></p>
+
+          <hr>
+          <% if(!!locals.hashtags){ %>
+          <p>Tags: <%= hashtags%></p>
+
+          <hr>
+          <% } %>
+          <!-- Post Content -->
+          <blockquote class="blockquote">
+            <p class="mb-0"><%=note.description %></p>
+          </blockquote>
+
+          <hr>
+          <% if(note.allowcomment == 1){ %>
+          <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+              <form action="comment" method="post">
+                <div class="form-group">
+                  <input type="hidden" name="noteid" value=<%= note.noteid %>>
+                  <textarea class="form-control" name="comment" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+          <% } else{ %>
+          <p>Comments are disabled</p>
+        <% } %>
+          <!-- Comment Loop-->
+          <% if(locals.comments.length>0){
+          locals.comments.forEach(function(comment){%>
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <%= comment.description %><br/>
+              <h6> <%= comment.name %>
+            </div>
+          </div>
+          <%});
+           }%>
+
+        </div>
+
+
+      </div>
+    </div>
+    <!-- /.container -->
+    <br/>
+    <br/>
+    <br/>
+
+    <!-- Footer -->
+    <div id="includeFooter"></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+    <script src="js/jqBootstrapValidation.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" />
+    <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+
+    })
+    $(document).ready(function(){
+        var time_input=$('input[name="time"]'); //our date input has the name "date"
+        time_input.timepicker()
+
+    })
+    </script>
+  </body>
+
+</html>
